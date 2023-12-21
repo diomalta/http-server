@@ -8,6 +8,7 @@ import { RouteService } from './service/RouterService.ts';
 
 export default class Application {
   #router: RouteService;
+  // @ts-expect-error - TODO
   #config: IServer.IApplicationConfig;
   #server: http.Server = {} as http.Server;
 

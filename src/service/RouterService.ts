@@ -1,11 +1,11 @@
 import type { IncomingMessage } from 'node:http';
 
-import { IServer } from '../interfaces';
+import { IRoute } from '../interfaces/server.interface';
 import { IRequestListener } from '../interfaces/response.interface';
 import { HandlerResponseService } from './HandlerResponseService';
 
 export class RouteService {
-  #routes: Map<string, IServer.IRoute> = new Map();
+  #routes: Map<string, IRoute> = new Map();
 
   setRoute(method: string, path: string, callback: IRequestListener) {
     if (!this.#routes.has(path)) {
