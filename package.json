@@ -9,7 +9,7 @@
     "dev": "npx tsx watch src/main.ts",
     "build": "tsc && vite build"
   },
-  "main": "dist/server.js",
+  "main": "dist/http-server.js",
   "types": "dist/main.d.ts",
   "publishConfig": {
     "access": "public"
