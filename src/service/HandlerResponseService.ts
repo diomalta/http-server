@@ -2,7 +2,6 @@ import http from 'node:http';
 
 export class HandlerResponseService extends http.ServerResponse {
   constructor(
-    // @ts-expect-error - TODO
     private readonly request: http.IncomingMessage,
     private readonly response: http.ServerResponse,
   ) {

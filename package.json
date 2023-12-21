@@ -7,10 +7,9 @@
     "format": "prettier --write .",
     "prepare": "husky install",
     "dev": "npx tsx watch src/main.ts",
-    "build": "tsc && vite build"
+    "build": "tsc"
   },
-  "main": "dist/http-server.js",
-  "types": "dist/main.d.ts",
+  "main": "dist/main.js",
   "publishConfig": {
     "access": "public"
   },

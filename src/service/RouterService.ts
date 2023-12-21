@@ -1,8 +1,8 @@
 import type { IncomingMessage } from 'node:http';
 
-import { IRoute } from '../interfaces/server.interface';
-import { IRequestListener } from '../interfaces/response.interface';
-import { HandlerResponseService } from './HandlerResponseService';
+import { IRoute } from '../interfaces/server.interface.js';
+import { IRequestListener } from '../interfaces/response.interface.js';
+import { HandlerResponseService } from './HandlerResponseService.js';
 
 export class RouteService {
   #routes: Map<string, IRoute> = new Map();

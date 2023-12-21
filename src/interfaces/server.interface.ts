@@ -1,4 +1,4 @@
-import { IRequestListener } from './response.interface';
+import { IRequestListener } from './response.interface.js';
 
 export interface IHttpServerInput {
   port: number;
