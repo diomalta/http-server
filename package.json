@@ -1,6 +1,6 @@
 {
   "name": "@diomalta/http-server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "lint": "eslint .",
