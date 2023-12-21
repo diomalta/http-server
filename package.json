@@ -1,6 +1,6 @@
 {
   "name": "@diomalta/http-server",
-  "version": "1.0.3",
+  "version": "1.0.2",
   "type": "module",
   "scripts": {
     "lint": "eslint .",
@@ -10,6 +10,7 @@
     "build": "tsc"
   },
   "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "publishConfig": {
     "access": "public"
   },

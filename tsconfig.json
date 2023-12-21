@@ -11,10 +11,12 @@
     "strict": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "declaration": true,
+    "rootDir": "src"
   },
   "ts-node": {
     "swc": true
   },
-  "include": ["**/*.ts", "**/*.js"]
+  "include": ["src"]
 }
