@@ -13,7 +13,16 @@ export class HandlerResponseService extends http.ServerResponse {
     return this;
   }
 
+  public header(header: Record<string, string | number | readonly string[]>) {
+    for (const [key, value] of Object.entries(header)) {
+      this.response.setHeader(key, value);
+    }
+
+    return this;
+  }
+
   public send(body: unknown) {
-    this.response.end(JSON.stringify(body));
+    this.response.write(JSON.stringify(body));
+    this.response.end();
   }
 }

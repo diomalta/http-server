@@ -7,7 +7,8 @@
     "format": "prettier --write .",
     "prepare": "husky install",
     "dev": "npx tsx watch src/main.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "TEST=1 node --no-warnings --experimental-vm-modules --async-stack-traces node_modules/jest/bin/jest.js -w8 --watchAll --detectOpenHandles --no-cache --coverage true"
   },
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
@@ -15,26 +16,76 @@
     "access": "public"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
+    "@jest/globals": "^29.7.0",
+    "@swc/jest": "^0.2.29",
+    "@types/jest": "^29.5.11",
     "@types/node": "^20.10.5",
+    "@types/supertest": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
+    "babel-jest": "^29.7.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.0",
     "husky": "^8.0.3",
+    "jest": "^29.7.0",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
+    "supertest": "^6.3.3",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
-    "vite-plugin-dts": "^3.6.4",
-    "ts-node-dev": "^2.0.0"
+    "vite-plugin-dts": "^3.6.4"
   },
   "lint-staged": {
     "**/*.{js,ts,tsx}": [
       "eslint --fix"
     ],
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "jest": {
+    "clearMocks": true,
+    "coverageProvider": "v8",
+    "transform": {
+      "^.+\\.tsx?$": [
+        "@swc/jest",
+        {
+          "jsc": {
+            "parser": {
+              "syntax": "typescript",
+              "decorators": true
+            },
+            "transform": {
+              "legacyDecorator": true,
+              "decoratorMetadata": true
+            }
+          }
+        }
+      ]
+    },
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "testRegex": "test/.*\\.test\\.ts$",
+    "testTimeout": 1000,
+    "coveragePathIgnorePatterns": [
+      "node_modules/",
+      "tests/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 40,
+        "functions": 35,
+        "lines": 60,
+        "statements": 60
+      }
+    }
   }
 }
