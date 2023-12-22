@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.status(200).send('Hello World');
 });
 
-app.listen(3000);
+app.listen({ port: 3000 });
 ```
 
 ## API
@@ -26,7 +26,6 @@ app.listen(3000);
 
 ## TODO
 
-- [ ] Add tests
 - [ ] Support for params
 - [ ] Support for middlewares
 - [ ] Support for https
