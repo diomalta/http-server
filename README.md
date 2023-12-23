@@ -35,9 +35,9 @@ Here are the available methods you can use:
 
 Here are the upcoming features that we're planning to add:
 
-- [] Support for route parameters
+- [ ] Support for route parameters
 - [x] Support for middleware functions
-- [] Support for HTTPS
-- [] Support for serving static files
+- [ ] Support for HTTPS
+- [ ] Support for serving static files
 
 Stay tuned for these exciting updates!
