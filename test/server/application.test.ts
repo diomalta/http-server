@@ -13,7 +13,7 @@ describe('Application', () => {
   beforeAll(() => {
     jest.spyOn(console, 'info').mockImplementation(() => {});
 
-    app = new Application({ debug: true });
+    app = new Application({});
     app.get('/', (_request, response) => {
       response
         .status(200)

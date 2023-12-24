@@ -1,19 +1,18 @@
-import type { IncomingMessage } from 'node:http';
-
 import { IRoute } from '../interfaces/server.interface.js';
 import { IRequestListener } from '../interfaces/response.interface.js';
 import { HandlerResponseService } from './HandlerResponseService.js';
+import { IRequest } from '../interfaces/request.interface.js';
 
 export class RouteService {
   #routes: Map<string, IRoute> = new Map();
 
   setRoute(method: string, path: string, callback: IRequestListener) {
     if (!this.#routes.has(path)) {
-      this.#routes.set(`${method}:${path}`, { method: 'get', path, callback });
+      this.#routes.set(`${method}:${path}`, { method, path, callback });
     }
   }
 
-  async handler(req: IncomingMessage, res: HandlerResponseService) {
+  async handler(req: IRequest, res: HandlerResponseService) {
     const { url, method } = req;
 
     if (!url || !method) {
@@ -28,9 +27,9 @@ export class RouteService {
       const end = performance.now();
 
       console.info(
-        `${new Date().toUTCString()} - ${route.method.toUpperCase()} ${
-          route.path
-        } ${(end - start).toFixed(3)} ms.`,
+        `${new Date().toUTCString()} - ${route.method} ${route.path} ${(
+          end - start
+        ).toFixed(3)} ms.`,
       );
 
       return result;

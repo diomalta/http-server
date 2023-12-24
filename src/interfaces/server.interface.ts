@@ -6,7 +6,8 @@ export interface IHttpServerInput {
 }
 
 export interface IApplicationConfig {
-  debug: boolean;
+  debug?: boolean;
+  bodyParser?: 'json' | 'text';
 }
 
 export interface IRoute {
