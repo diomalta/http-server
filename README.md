@@ -37,6 +37,8 @@ Here are the upcoming features that we're planning to add:
 
 - [ ] Support for route parameters
 - [x] Support for middleware functions
+- [x] Support for body parser json and text
+- [x] Support for streaming
 - [ ] Support for HTTPS
 - [ ] Support for serving static files
 

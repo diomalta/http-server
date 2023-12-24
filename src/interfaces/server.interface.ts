@@ -6,11 +6,17 @@ export interface IHttpServerInput {
 }
 
 export interface IApplicationConfig {
-  debug: boolean;
+  debug?: boolean;
+  bodyParser?: 'json' | 'text';
+}
+
+export interface IRouteOptions {
+  stream?: boolean;
 }
 
 export interface IRoute {
   path: string;
   method: string;
   callback: IRequestListener;
+  options?: IRouteOptions;
 }

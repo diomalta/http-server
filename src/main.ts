@@ -16,9 +16,9 @@ export default class Application {
   #routerService: RouteService;
   #server: http.Server = {} as http.Server;
 
-  constructor(config: IServer.IApplicationConfig) {
+  constructor(readonly config: IServer.IApplicationConfig) {
     this.#config = config;
-    this.#routerService = new RouteService();
+    this.#routerService = new RouteService(config);
     this.#middlewareService = new MiddlewareService();
 
     this.#server = new http.Server(async (request, response) => {
@@ -32,24 +32,44 @@ export default class Application {
     this.#middlewareService.use(middleware);
   }
 
-  public get(path: string, callback: IRequestListener) {
-    this.#routerService.setRoute('GET', path, callback);
+  public get(
+    path: string,
+    callback: IRequestListener,
+    options?: IServer.IRouteOptions,
+  ) {
+    this.#routerService.setRoute('GET', path, callback, options);
   }
 
-  public post(path: string, callback: IRequestListener) {
-    this.#routerService.setRoute('POST', path, callback);
+  public post(
+    path: string,
+    callback: IRequestListener,
+    options?: IServer.IRouteOptions,
+  ) {
+    this.#routerService.setRoute('POST', path, callback, options);
   }
 
-  public put(path: string, callback: IRequestListener) {
-    this.#routerService.setRoute('PUT', path, callback);
+  public put(
+    path: string,
+    callback: IRequestListener,
+    options?: IServer.IRouteOptions,
+  ) {
+    this.#routerService.setRoute('PUT', path, callback, options);
   }
 
-  public delete(path: string, callback: IRequestListener) {
-    this.#routerService.setRoute('DELETE', path, callback);
+  public delete(
+    path: string,
+    callback: IRequestListener,
+    options?: IServer.IRouteOptions,
+  ) {
+    this.#routerService.setRoute('DELETE', path, callback, options);
   }
 
-  public patch(path: string, callback: IRequestListener) {
-    this.#routerService.setRoute('PATCH', path, callback);
+  public patch(
+    path: string,
+    callback: IRequestListener,
+    options?: IServer.IRouteOptions,
+  ) {
+    this.#routerService.setRoute('PATCH', path, callback, options);
   }
 
   public listen({ port, message }: IServer.IHttpServerInput) {
