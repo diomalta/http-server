@@ -3,7 +3,6 @@ import http from 'node:http';
 import { HandlerResponseService } from './service/HandlerResponseService.js';
 import { RouteService } from './service/RouterService.js';
 import { MiddlewareService } from './service/MiddlewareService.js';
-import { BodyParserService } from './service/BodyParserService.js';
 
 import * as IServer from './interfaces/server.interface.js';
 import {
@@ -12,22 +11,19 @@ import {
 } from './interfaces/response.interface.js';
 
 export default class Application {
-  #bodyParser: BodyParserService;
   #config: IServer.IApplicationConfig;
   #middlewareService: MiddlewareService;
   #routerService: RouteService;
   #server: http.Server = {} as http.Server;
 
-  constructor(config: IServer.IApplicationConfig) {
+  constructor(readonly config: IServer.IApplicationConfig) {
     this.#config = config;
-    this.#routerService = new RouteService();
+    this.#routerService = new RouteService(config);
     this.#middlewareService = new MiddlewareService();
-    this.#bodyParser = new BodyParserService();
 
     this.#server = new http.Server(async (request, response) => {
       const customResponse = new HandlerResponseService(request, response);
       await this.#middlewareService.handleRequest(request, customResponse);
-      await this.#bodyParser.parser(request, this.#config.bodyParser);
       await this.#routerService.handler(request, customResponse);
     });
   }
@@ -36,24 +32,44 @@ export default class Application {
     this.#middlewareService.use(middleware);
   }
 
-  public get(path: string, callback: IRequestListener) {
-    this.#routerService.setRoute('GET', path, callback);
+  public get(
+    path: string,
+    callback: IRequestListener,
+    options?: IServer.IRouteOptions,
+  ) {
+    this.#routerService.setRoute('GET', path, callback, options);
   }
 
-  public post(path: string, callback: IRequestListener) {
-    this.#routerService.setRoute('POST', path, callback);
+  public post(
+    path: string,
+    callback: IRequestListener,
+    options?: IServer.IRouteOptions,
+  ) {
+    this.#routerService.setRoute('POST', path, callback, options);
   }
 
-  public put(path: string, callback: IRequestListener) {
-    this.#routerService.setRoute('PUT', path, callback);
+  public put(
+    path: string,
+    callback: IRequestListener,
+    options?: IServer.IRouteOptions,
+  ) {
+    this.#routerService.setRoute('PUT', path, callback, options);
   }
 
-  public delete(path: string, callback: IRequestListener) {
-    this.#routerService.setRoute('DELETE', path, callback);
+  public delete(
+    path: string,
+    callback: IRequestListener,
+    options?: IServer.IRouteOptions,
+  ) {
+    this.#routerService.setRoute('DELETE', path, callback, options);
   }
 
-  public patch(path: string, callback: IRequestListener) {
-    this.#routerService.setRoute('PATCH', path, callback);
+  public patch(
+    path: string,
+    callback: IRequestListener,
+    options?: IServer.IRouteOptions,
+  ) {
+    this.#routerService.setRoute('PATCH', path, callback, options);
   }
 
   public listen({ port, message }: IServer.IHttpServerInput) {

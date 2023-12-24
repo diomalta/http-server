@@ -21,6 +21,7 @@ export class BodyParserService {
 
   async #json(request: IRequest): Promise<Record<string, unknown>> {
     const rawData = await this.#text(request);
+    if (!rawData) return {};
     return JSON.parse(rawData);
   }
 
@@ -39,9 +40,8 @@ export class BodyParserService {
         this.#setBody(request, await this.#json(request));
         break;
       case 'text':
-        this.#setBody(request, await this.#text(request));
-        break;
       default:
+        this.#setBody(request, await this.#text(request));
         break;
     }
   }
