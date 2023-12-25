@@ -44,3 +44,7 @@ Here are the upcoming features that we're planning to add:
 - [ ] Support for serving static files
 
 Stay tuned for these exciting updates!
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](MIT-LICENSE.txt) file for details.
