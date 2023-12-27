@@ -1,4 +1,7 @@
 import http from 'node:http';
+import cluster from 'node:cluster';
+import os from 'node:os';
+import process from 'node:process';
 
 import { HandlerResponseService } from './service/HandlerResponseService.js';
 import { RouteService } from './service/RouterService.js';
@@ -72,10 +75,36 @@ export default class Application {
     this.#routerService.setRoute('PATCH', path, callback, options);
   }
 
+  #clusterMode({ port, message }: IServer.IHttpServerInput) {
+    const numCPUs = os.availableParallelism();
+
+    if (cluster.isPrimary) {
+      console.log(`Primary ${process.pid} is running`);
+
+      // Fork workers.
+      for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
+      }
+      cluster.on('exit', (worker) => {
+        console.log(`worker ${worker.process.pid} died`);
+      });
+    } else {
+      this.#server.listen(port, () => {
+        console.info(message ?? `Server listening on port ${port}`);
+      });
+
+      console.log(`Worker ${process.pid} started`);
+    }
+  }
+
   public listen({ port, message }: IServer.IHttpServerInput) {
-    this.#server.listen(port, () => {
-      console.info(message ?? `Server listening on port ${port}`);
-    });
+    if (this.#config.clusterMode) {
+      this.#clusterMode({ port, message });
+    } else {
+      this.#server.listen(port, () => {
+        console.info(message ?? `Server listening on port ${port}`);
+      });
+    }
   }
 
   public getServer() {

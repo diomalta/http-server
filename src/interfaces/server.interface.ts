@@ -8,6 +8,7 @@ export interface IHttpServerInput {
 export interface IApplicationConfig {
   debug?: boolean;
   bodyParser?: 'json' | 'text';
+  clusterMode?: boolean;
 }
 
 export interface IRouteOptions {
