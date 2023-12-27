@@ -2,6 +2,12 @@
 
 This is a wrapper do node http server, it's a simple way to create a server.
 
+## Installation
+
+```bash
+npm install @diomalta/http-server
+```
+
 ## How to use
 
 ```javascript
@@ -9,10 +15,18 @@ This is a wrapper do node http server, it's a simple way to create a server.
 import Application from '@diomalta/http-server';
 
 // Create a new Application instance
-const app = new Application();
+const app = new Application({
+  bodyParsers: 'json',
+  clusterMode: true,
+});
 
 // Define a GET route
 app.get('/', (req, res) => {
+  res.status(200).send('Hello World');
+});
+
+// Define a users GET route
+app.get('/users/:id', (req, res) => {
   res.status(200).send('Hello World');
 });
 
@@ -95,7 +109,7 @@ In summary, cluster mode can offer significantly better performance and greater 
 
 Here are the upcoming features that we're planning to add:
 
-- [ ] Support for route parameters
+- [x] Support for route parameters
 - [x] Support for middleware functions
 - [x] Support for body parser json and text
 - [x] Support for streaming

@@ -18,6 +18,7 @@ export interface IRouteOptions {
 export interface IRoute {
   path: string;
   method: string;
+  params?: Record<string, unknown>;
   callback: IRequestListener;
   options?: IRouteOptions;
 }

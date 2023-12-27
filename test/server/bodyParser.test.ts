@@ -2,7 +2,7 @@ import { jest } from '@jest/globals';
 import type { App } from 'supertest/types.js';
 import request from 'supertest';
 
-import Application from '../src/main.js';
+import Application from '../../src/main.js';
 
 describe('Body Parser', () => {
   beforeAll(() => {

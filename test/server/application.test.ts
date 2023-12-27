@@ -4,7 +4,7 @@ import request from 'supertest';
 import { Server } from 'node:http';
 import type { App } from 'supertest/types.js';
 
-import Application from '../src/main.js';
+import Application from '../../src/main.js';
 
 describe('Application', () => {
   let server: App;
