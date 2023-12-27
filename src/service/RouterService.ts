@@ -94,6 +94,10 @@ export class RouteService {
     const route = this.getRoute(method, url);
 
     if (route) {
+      if (route.params) {
+        Reflect.defineProperty(request, 'params', { value: route.params });
+      }
+
       try {
         if (!route.options?.stream) {
           await this.#bodyParser.parser(request, this.#config.bodyParser);
@@ -113,6 +117,7 @@ export class RouteService {
 
         return result;
       } catch (err) {
+        console.error(err);
         response.status(500).send({ message: 'Internal Server Error' });
       }
     } else {

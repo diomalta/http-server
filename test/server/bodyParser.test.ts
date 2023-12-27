@@ -12,9 +12,9 @@ describe('Body Parser', () => {
   it('#POST should handle JSON body when bodyParser is set to json', async () => {
     const app = new Application({ bodyParser: 'json' });
 
-    app.post('/users', (_request, response) => {
-      expect(_request.body).toBeInstanceOf(Object);
-      expect(_request.body).toEqual({ name: 'John Doe' });
+    app.post('/users', (request, response) => {
+      expect(request.body).toBeInstanceOf(Object);
+      expect(request.body).toEqual({ name: 'John Doe' });
       return response.status(201).send({});
     });
 
@@ -26,9 +26,9 @@ describe('Body Parser', () => {
   it('#POST should handle string body when bodyParser is not set', async () => {
     const app = new Application({});
 
-    app.post('/users', (_request, response) => {
-      expect(typeof _request.body).toEqual('string');
-      expect(_request.body).toEqual('{"name":"John Doe"}');
+    app.post('/users', (request, response) => {
+      expect(typeof request.body).toEqual('string');
+      expect(request.body).toEqual('{"name":"John Doe"}');
       return response.status(201).send({});
     });
 
@@ -39,8 +39,8 @@ describe('Body Parser', () => {
   it('#POST should handle empty body when bodyParser is not set', async () => {
     const app = new Application({});
 
-    app.post('/users', (_request, response) => {
-      expect(_request.body).toEqual('');
+    app.post('/users', (request, response) => {
+      expect(request.body).toEqual('');
       return response.status(201).send({});
     });
 
@@ -51,8 +51,8 @@ describe('Body Parser', () => {
   it('#OST should handle empty JSON body when bodyParser is set to json', async () => {
     const app = new Application({ bodyParser: 'json' });
 
-    app.post('/users', (_request, response) => {
-      expect(_request.body).toEqual({});
+    app.post('/users', (request, response) => {
+      expect(request.body).toEqual({});
       return response.status(201).send({});
     });
 
