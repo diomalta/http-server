@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 // Define a users GET route
 app.get('/users/:id', (req, res) => {
-  res.status(200).send('Hello World');
+  res.status(200).send({ name: 'joe' });
 });
 
 // Start the server on port 3000
@@ -103,7 +103,7 @@ vus_max........................: 1000    min=1000     max=1000
 
 Load tests conducted with K6 clearly demonstrate the advantages of cluster mode. In single mode, the server was able to handle around 80 requests per second, with an average response time of 6.44 seconds. However, in cluster mode, the server was able to handle over 440 requests per second, with an average response time of only 1.15 seconds. Furthermore, in cluster mode, all requests were successful, while in single mode, approximately 1.10% of requests failed.
 
-In summary, cluster mode can offer significantly better performance and greater fault resilience compared to single mode, especially in systems with multiple CPU cores.
+In summary, cluster mode can offer significantly better performance and greater fault resilience compared to single mode, especially in systems with multiple CPU cores. **The tests were performed with intensive CPU usage, utilizing a Fibonacci(30) function for both modes**.
 
 ## Roadmap
 
