@@ -22,8 +22,8 @@
   "devDependencies": {
     "@babel/core": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
-    "@commitlint/cli": "^18.4.3",
-    "@commitlint/config-conventional": "^18.4.3",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
     "@jest/globals": "^29.7.0",
     "@swc/jest": "^0.2.29",
     "@types/jest": "^29.5.11",
