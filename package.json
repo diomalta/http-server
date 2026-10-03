@@ -20,8 +20,8 @@
     "url": "https://github.com/diomalta/http-server.git"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.6",
-    "@babel/preset-env": "^7.23.6",
+    "@babel/core": "^8.0.0",
+    "@babel/preset-env": "^8.0.0",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
     "@jest/globals": "^29.7.0",
